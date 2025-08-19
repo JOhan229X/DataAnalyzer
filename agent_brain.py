@@ -1,4 +1,3 @@
-# agent_brain.py (V3.1 - 统一使用API Key认证)
 
 import os
 import json
@@ -146,7 +145,7 @@ tools = [
     ),
 ]
 
-# ... [Prompt模板部分保持不变] ...
+
 prompt_template = """
 你是一个名为 'InsightBot' 的顶尖风险投资分析AI助手。你的沟通风格必须专业、简洁、数据驱动。
 
@@ -182,17 +181,17 @@ def initialize_agent():
         print("Initializing Agent for the first time...")
         
         # 从环境变量中获取API Key
-        gemini_api_key = os.getenv("GEMINI_API_KEY")
+        gemini_api_key = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
         if not gemini_api_key:
-            raise ValueError("GEMINI_API_KEY 环境变量未设置！请在.env文件中配置。")
+            # 使用 st.error 在网页上显示错误，并停止运行
+            st.error("GEMINI_API_KEY 未设置！请在.env文件或Streamlit secrets中配置。")
+            st.stop()
         
-        # 初始化模型时，明确传入 google_api_key 参数
         llm = ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash-latest", 
+            model="gemini-1.5-flash-latest",    
             temperature=0,
-            google_api_key=gemini_api_key # <-- 核心改动在这里
+            google_api_key=gemini_api_key
         )
-        
         agent = create_react_agent(llm, tools, prompt)
         
         st.session_state.agent = agent

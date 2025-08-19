@@ -13,8 +13,8 @@ import logging
 
 # --- 配置 ---
 # 从环境变量安全加载API密钥
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+NEWS_API_KEY = st.secrets.get("NEWS_API_KEY", os.getenv("NEWS_API_KEY"))
+GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
 # --- 内部函数 ---
 def _search_newsapi(company_name: str) -> List[Dict]:
     """私有函数：通过NewsAPI进行搜索"""
