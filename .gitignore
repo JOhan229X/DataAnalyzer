@@ -1,0 +1,21 @@
+# 忽略存放敏感环境变量的文件
+.env
+
+# 忽略 Python 缓存文件和文件夹
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 忽略数据库文件
+*.db
+companies_data.db
+
+# 忽略 Streamlit 的配置文件
+.streamlit/
+
+# 忽略虚拟环境文件夹 (如果使用 venv, pyenv 等)
+venv/
+.venv/
+env/
+.env/
