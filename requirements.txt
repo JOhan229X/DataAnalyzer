@@ -1,0 +1,12 @@
+# requirements.txt
+
+streamlit
+pandas
+requests
+beautifulsoup4
+trafilatura
+python-dotenv
+langchain
+langchain-google-genai
+pydantic
+lxml
